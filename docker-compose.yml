@@ -1,0 +1,36 @@
+version: "3"
+ 
+services:   
+  servicio_php-apache-xdebug:
+    container_name: php-apache-mysql-XDebug6  # toasterlint/php-apache-mysql
+    build: .
+    volumes:
+      # Montamos a web desde fóra no directorio web do contenedor
+      - ./php/src:/var/www/html
+      - ./xdebug:/var/logs/xdebug
+    ports:
+      - 8000:80
+
+  db:
+   container_name: db6
+   image: mysql
+   environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: proba
+    MYSQL_USER: usuario
+    MYSQL_PASSWORD: abc123.
+   volumes:
+    - ./dbdata:/var/lib/mysql
+   ports:
+     - 9906:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin6
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    
+    
+
