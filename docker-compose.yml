@@ -2,7 +2,7 @@ version: "3"
  
 services:   
   servicio_php-apache-xdebug:
-    container_name: php-apache-mysql-XDebug6  # toasterlint/php-apache-mysql
+    container_name: php-apache-mysql-XDebug7  # toasterlint/php-apache-mysql
     build: .
     volumes:
       # Montamos a web desde fóra no directorio web do contenedor
@@ -12,7 +12,7 @@ services:
       - 8000:80
 
   db:
-   container_name: db6
+   container_name: db7
    image: mysql
    environment:
     MYSQL_ROOT_PASSWORD: root
@@ -26,7 +26,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: phpmyadmin6
+    container_name: phpmyadmin7
     ports:
       - 8080:80
     environment:

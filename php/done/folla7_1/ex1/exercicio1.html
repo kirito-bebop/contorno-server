@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document1</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+crossorigin="anonymous"></script>
+<script type="text/javascript">
+function validarEmailNome() {
+    valor = document.getElementById("email").value;
+    nome = document.querySelector("#nome")
+    posArroba = valor.indexOf("@");
+    posPunto = valor.lastIndexOf(".");
+    if (posArroba < 1 || posPunto < posArroba+2 || posPunto+2>=valor.length) {
+        alert('Dirección de correo no válida.');
+        return false;
+    }
+    if(nome.value != "Ana" && nome.value !="Xan"){
+        alert("Nome erróneo");
+        return false;
+    }
+    return true; //NESTE EXEMPLO NON ENVIAMOS OS VALORES CO ACTION DO FORM
+    
+$.ajax({
+    type: "POST", url: "email.php", data: "email=" + valor + "&nome=" + nome.value,
+    statusCode: {
+        404: function() { alert('Páxina non atopada'); }
+    },
+    success: function(resultado) { alert( "Resultado: " + resultado ); }
+    });
+    return false;
+}
+
+</script>
+</head>
+<body>
+<form action='email.php' method='POST' name='datos_usuario' onsubmit="validarEmailNome()">
+<input type='text' id='email' name='email' /><br>
+<input type="text" name="nome" id="nome">
+<input type='submit' name='enviar' value='Enviar'/>
+</form>
+</body>
+</html>
